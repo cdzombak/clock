@@ -195,6 +195,11 @@
       if (themeClass) {
         document.body.className = themeClass;
       }
+      const body = document.getElementsByTagName("body")[0];
+      const bodyBgColor = window.getComputedStyle(body).backgroundColor;
+      if (bodyBgColor) {
+        document.querySelector('meta[name="theme-color"]').setAttribute('content',  bodyBgColor);
+      }
     }
     const setTheme = function(themeClass) {
         localStorage.setItem("themeClass", themeClass);
