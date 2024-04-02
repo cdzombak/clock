@@ -1,36 +1,239 @@
 <html lang="en">
 <head>
+  <meta charset="utf-8">
   <title>Clock</title>
   <style>
-    p#clock, p#clockUTC {
-      font-size: 6em;
-      margin-top: .75em;
-      text-align: center;
+    body {
       font-family: sans-serif;
     }
+    .clock {
+      font-size: 6em;
+      text-align: center;
+      margin: .75em;
+      z-index: 1;
+    }
+    .clock .colon, .clock .desc {
+      font-weight: 300;
+    }
+    .clock .n {
+      font-weight: 500;
+    }
+    .clock .desc {
+      padding-left: .1em;
+    }
+    .sideButton {
+      font-size: 1.1em;
+      padding: .4em .25em;
+      position: absolute;
+      right: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: 1px dotted slategray;
+      z-index: 90;
+      transition: 0.1s;
+    }
+    a.sideButton {
+      text-decoration: none;
+      display: block;
+    }
+    #openThemeMenuBtn {
+      top: 20px;
+    }
+    #infoBtn {
+      bottom: 20px;
+    }
+    .dropdown {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 200px;
+      background: #fafafa;
+      border: 1px solid slategray;
+      border-radius: 5px;
+      transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
+      transform: translateY(0.5rem);
+      visibility: hidden;
+      opacity: 0;
+      z-index: 100;
+    }
+    /*noinspection CssUnusedSymbol*/
+    .show {
+      transform: translateY(0rem);
+      visibility: visible;
+      opacity: 1;
+    }
+    .dropdown a {
+      padding: .5em .75em;
+      text-decoration: none;
+      color: black;
+      display: block;
+      text-align: right;
+      border-radius: 5px;
+    }
+    .dropdown a:hover {
+      background-color: aliceblue;
+    }
+    body.plain {
+      background-color: white;
+      color: #111;
+    }
+    body.plain .clock .colon, body.plain .clock .desc {
+      color: #222;
+    }
+    body.plain .sideButton {
+      background-color: aliceblue;
+    }
+    body.plain .sideButton:hover {
+      background-color: lightblue;
+    }
+    body.solarizedLight {
+      background-color: #fdf6e3;
+      color: #586e75;
+    }
+    body.solarizedLight .clock .colon, body.solarizedLight .clock .desc {
+      color: #657b83;
+    }
+    body.solarizedLight .sideButton {
+      background-color: #eee8d5;
+    }
+    body.solarizedLight .sideButton:hover {
+      background-color: #268bd2;
+    }
+    body.solarizedDark {
+      background-color: #002b36;
+      color: #93a1a1;
+    }
+    body.solarizedDark .clock .colon, body.solarizedDark .clock .desc {
+      color: #839496;
+    }
+    body.solarizedDark .sideButton {
+      background-color: #586e75;
+    }
+    body.solarizedDark .sideButton:hover {
+      background-color: #268bd2;
+    }
+    body.tomorrow {
+      background-color: white;
+      color: #60605f;
+    }
+    body.tomorrow .clock .colon, body.tomorrow .clock .desc {
+      color: #a9a9a9;
+    }
+    body.tomorrow .sideButton {
+      background-color: #f2f2f2;
+    }
+    body.tomorrow .sideButton:hover {
+      background-color: #78aad6;
+    }
+    body.tomorrowNight {
+      background-color: #27292c;
+      color: #d7dad8;
+    }
+    body.tomorrowNight .clock .colon, body.tomorrowNight .clock .desc {
+      color: #a7a8a7;
+    }
+    body.tomorrowNight .sideButton {
+      background-color: #35383c;
+    }
+    body.tomorrowNight .sideButton:hover {
+      background-color: #78aad6;
+    }
+    body.tomorrowNightEighties {
+      background-color: #3b3b3b;
+      color: #d5d5d5;
+    }
+    body.tomorrowNightEighties .clock .colon, body.tomorrowNightEighties .clock .desc {
+      color: #a9a9a9;
+    }
+    body.tomorrowNightEighties .sideButton {
+      background-color: #494949;
+    }
+    body.tomorrowNightEighties .sideButton:hover {
+      background-color: #78aad6;
+    }
   </style>
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff5f5f">
-  <meta name="apple-mobile-web-app-title" content="Clock">
-  <meta name="application-name" content="Clock">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
+  <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<meta name="msapplication-TileColor" content="#69686f">
+<meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+<meta name="theme-color" content="#75849d">
 </head>
-<body>
-  <p id="clock"></p>
-  <p id="clockUTC"></p>
+<body class="plain">
+  <script type="text/javascript">
+    const applyTheme = function() {
+      const themeClass = localStorage.getItem("themeClass");
+      if (themeClass) {
+        document.body.className = themeClass;
+      }
+    }
+    const setTheme = function(themeClass) {
+        localStorage.setItem("themeClass", themeClass);
+        applyTheme();
+    }
+    applyTheme();
+  </script>
+  <button id="openThemeMenuBtn" class="sideButton">⚙️</button>
+  <a id="infoBtn" class="sideButton" href="https://github.com/cdzombak/clock" style="padding-left: 6px; padding-right: 6px;">ℹ️</a>
+  <div class="dropdown" id="themeMenu">
+    <a href="#" data-theme-class="Plain">Plain</a>
+    <a href="#" data-theme-class="solarizedLight">Solarized Light</a>
+    <a href="#" data-theme-class="solarizedDark">Solarized Dark</a>
+    <a href="#" data-theme-class="tomorrow">Tomorrow</a>
+    <a href="#" data-theme-class="tomorrowNight">Tomorrow Night</a>
+    <a href="#" data-theme-class="tomorrowNightEighties">Tomorrow Night Eighties</a>
+  </div>
+  <p id="clockLocal" class="clock"></p>
+  <p id="clockUTC" class="clock"></p>
   <script type="text/javascript">
     setInterval(function() {
-      timer();
-    }, 250);
-
-    function timer() {
+      onTimer();
+    }, 330);
+    const dateToUTCString = function(d) {
+      return "" + d.getUTCHours().toString().padStart(2, "0") + ":" + d.getUTCMinutes().toString().padStart(2, "0") + ":" + d.getUTCSeconds().toString().padStart(2, "0") + " UTC"
+    }
+    const tsToHtml = function(ts) {
+      const parts = ts.split(' ');
+      let tPart = parts[0].replaceAll(':', '<span class="colon">:</span>');
+      tPart = tPart.replace(/(\d+)/g, '<span class="n">$1</span>');
+      return tPart + ' <span class="desc">' + parts[1] + '</span>';
+    }
+    const onTimer = function() {
       const d = new Date();
-      document.getElementById("clock").innerText = d.toLocaleTimeString();
-      document.getElementById("clockUTC").innerText = "" + d.getUTCHours().toString().padStart(2, "0") + ":" + d.getUTCMinutes().toString().padStart(2, "0") + ":" + d.getUTCSeconds().toString().padStart(2, "0") + " UTC";
+      document.getElementById("clockLocal").innerHTML = tsToHtml(d.toLocaleTimeString());
+      document.getElementById("clockUTC").innerHTML = tsToHtml(dateToUTCString(d));
+    }
+    const themeMenu = document.getElementById("themeMenu");
+    const toggleThemeMenu = function() {
+        themeMenu.classList.toggle("show");
+    };
+    const themeMenuBtn = document.getElementById("openThemeMenuBtn");
+    themeMenuBtn.addEventListener("click", function (e) {
+      e.stopPropagation();
+      toggleThemeMenu();
+    });
+    document.documentElement.addEventListener("click", function () {
+      if (themeMenu.classList.contains("show")) {
+        toggleThemeMenu();
+      }
+    });
+    for (const themeLink of themeMenu.getElementsByTagName('a')) {
+      const themeClass = themeLink.dataset.themeClass;
+      themeLink.addEventListener("click", function (e) {
+        e.preventDefault();
+        setTheme(themeClass);
+      });
     }
   </script>
 </body>
