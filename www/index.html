@@ -8,10 +8,52 @@
       margin-top: 0;
     }
     .clock {
-      font-size: 6em;
       text-align: center;
-      margin: .75em;
       z-index: 1;
+    }
+    @media (32em <= width) {
+      .clock {
+        font-size: 6em;
+      }
+      @media (30em <= height) {
+        .clock {
+          margin: .75em .25em;
+        }
+      }
+    }
+    @media (21em <= width < 32em) {
+      .clock {
+        font-size: 5em;
+      }
+    }
+    @media (width < 21em) {
+      .clock {
+        font-size: 4em;
+      }
+    }
+    @media (30em <= height) {
+      .clock {
+        margin: .75em .25em;
+      }
+      .clock#clockLocal {
+        margin-top: 1.25em;
+      }
+    }
+    @media (21em <= height < 32em) {
+      .clock {
+        margin: .5em .25em;
+      }
+    }
+    @media (15em <= height < 21em) {
+      .clock {
+        margin: .3em .15em;
+      }
+    }
+    @media (height < 15em) {
+      .clock {
+        font-size: 3em;
+        margin: .15em .11em;
+      }
     }
     .clock .colon, .clock .desc {
       font-weight: 300;
@@ -24,29 +66,35 @@
     }
     .sideButton {
       font-size: 1.1em;
-      padding: .4em .25em;
       position: absolute;
-      right: 20px;
+      right: 22px;
       border-radius: 5px;
       cursor: pointer;
       border: 1px dotted slategray;
       z-index: 90;
       transition: 0.1s;
+      text-align: center;
+      height: 44px;
+      width: 44px;
+      display: block;
+      white-space: nowrap;
     }
     a.sideButton {
       text-decoration: none;
-      display: block;
+      padding: 0;
+      margin: 0;
+      line-height: 44px;
     }
     #openThemeMenuBtn {
-      top: 20px;
+      top: 22px;
     }
     #infoBtn {
-      bottom: 20px;
+      bottom: 22px;
     }
     .dropdown {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: 22px;
+      right: 22px;
       width: 200px;
       background: #fafafa;
       border: 1px solid slategray;
@@ -187,6 +235,7 @@
   <meta name="msapplication-TileColor" content="#69686f">
   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body class="plain">
   <script type="text/javascript">
