@@ -1,37 +1,37 @@
-<html>
+<html lang="en">
 <head>
-    <title>Clock</title>
-    <style type="text/css">
-        p#clock, p#clockUTC {
-            font-size: 6em;
-            margin-top: .75em;
-            text-align: center;
-            font-family: sans-serif;
-        }
-    </style>
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff5f5f">
-    <meta name="apple-mobile-web-app-title" content="Clock">
-    <meta name="application-name" content="Clock">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
+  <title>Clock</title>
+  <style>
+    p#clock, p#clockUTC {
+      font-size: 6em;
+      margin-top: .75em;
+      text-align: center;
+      font-family: sans-serif;
+    }
+  </style>
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff5f5f">
+  <meta name="apple-mobile-web-app-title" content="Clock">
+  <meta name="application-name" content="Clock">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
 </head>
 <body>
-<p id="clock"></p>
-<p id="clockUTC"></p>
-<script type="text/javascript">
+  <p id="clock"></p>
+  <p id="clockUTC"></p>
+  <script type="text/javascript">
     setInterval(function() {
-        timer();
+      timer();
     }, 250);
 
     function timer() {
-      var d = new Date();
+      const d = new Date();
       document.getElementById("clock").innerText = d.toLocaleTimeString();
       document.getElementById("clockUTC").innerText = "" + d.getUTCHours().toString().padStart(2, "0") + ":" + d.getUTCMinutes().toString().padStart(2, "0") + ":" + d.getUTCSeconds().toString().padStart(2, "0") + " UTC";
     }
-</script>
+  </script>
 </body>
 </html>
